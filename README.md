@@ -175,7 +175,7 @@ we need to change the default ssh port and limit the open ports on the machine
 
 ## Install Apache and other software
 
-	- install the fowlling sofrware 
+- install the fowlling sofrware
 
 	 ```
 	 sudo timedatectl set-timezone UTC
@@ -276,14 +276,14 @@ we need to change the default ssh port and limit the open ports on the machine
 	 sudo nano /etc/postgresql/10/main/pg_hba.conf
 	 ```
 
-And change "peer" to "md5" on the line concerning postgres :
+	And change "peer" to "md5" on the line concerning postgres :
 
 	```	
 	local      all     postgres     peer md5
 	# IPv4 local connections:
 	host     all             catalog        127.0.0.1/32            md5
 	```
-the last line will allow conection form local host only for a user catalog that we will ceate later to use it in our DB connection string 
+	the last line will allow conection form local host only for a user catalog that we will ceate later to use it in our DB connection string 
 
 4. open file named postgresql.conf
 	```
