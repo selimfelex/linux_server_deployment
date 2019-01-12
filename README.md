@@ -1,5 +1,5 @@
 # Linux Server Deployment
-deploy Linux server on the cloud serving python ,flask, WSGI, Apache, PostgerSQL
+how to deploy you python web application and configure  Linux server on the cloud serving python ,flask, WSGI, Apache, PostgerSQL
 
 ## Project Description
  this project will describe how to deploy Linux web server on Amazon web services AWS utilizing the technologies of Python SQLAlchemy, Flask Framework, OAuth 2.0 Protocol, APIs, Apache, WSGI and  PostgreSQL to run Python web-application  called (Item Catalog)
