@@ -246,5 +246,74 @@ we need to change the default ssh port and limit the open ports on the machine
 
 	3.  you need to add an empty file inside your app folder called __init__.py
 	```	
-		touch /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON/__init.py
+	touch /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON/__init.py
 	```
+
+## configure PostgreSQL
+
+   On Linux systems, there is no default password set.
+   To set the default password:
+1. Connect to the default database with user postgres :
+
+	```
+	sudo -u postgres psql template1
+	```
+
+ 2. Set the password for user postgres, then exit psql (Ctrl-D) :
+	```	
+    ALTER USER postgres with encrypted password 'xxxxxxx';
+   ```	
+
+    Close psql. 
+	```	
+    \q
+	```	
+
+3. Edit the pg_hba.conf file :
+	```	
+	sudo nano /etc/postgresql/10/main/pg_hba.conf
+	```	
+And change "peer" to "md5" on the line concerning postgres :
+	```	
+	local      all     postgres     peer md5
+	# IPv4 local connections:
+	host     all             catalog        127.0.0.1/32            md5
+	```
+the last line will allow conection form local host only for a user catalog that we will ceate later to use it in our DB connection string 
+
+4. open file named postgresql.conf
+	```
+	sudo nano /etc/postgresql/10/main/postgresql.conf
+	```
+	add the follwing ip to secure the connection to be from local host only
+	```	
+	# - Connection Settings -
+	listen_addresses = '127.0.0.1'
+	```
+
+5. Restart the database :
+sudo /etc/init.d/postgresql restart
+
+
+6. create a database user named catalog and create database named catalog from the plsql 
+	```
+	CREATE DATABASE catalog ENCODING 'UTF8' ;
+	create user catalog with password 'xxxxxx';
+	ALTER USER catalog CREATEDB
+	```
+
+
+## how to un the app
+make sure you run the fowlling files for the DB tables creation and  seed fron the app directiory
+
+cd /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON/
+	```
+	python database_setup.py
+	python seeder.py
+	```
+
+## how to access the web app
+by browsing the fowlling URI
+	http://18.217.208.41.xip.io
+	http://ec2-18-217-208-41.us-east-2.compute.amazonaws.com
+	
