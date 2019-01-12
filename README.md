@@ -148,17 +148,18 @@ we need to change the default ssh port and limit the open ports on the machine
 	```
     Touch .ssh/authorized_keys
 	```
-       Open your local terminal 
-       Generate key pair(public and private using ssh-keygen command )
-       Copy the content of your public key to the authorized_key file on the vm
-	   Put the private key under your .ssh folder in your windows local machine 
-       Then try to login with 
-       $ ssh -i "~/.ssh/grader_rsa" grader@ec2-18-217-208-41.us-east-2.compute.amazonaws.com -p 2200
-	   Then disable the following on /etc/ssh/ssh-config
 
-	   PasswordAuthentication no  
+    Open your local terminal 
+    Generate key pair(public and private using ssh-keygen command )
+    Copy the content of your public key to the authorized_key file on the vm
+	Put the private key under your .ssh folder in your windows local machine 
+    Then try to login with 
+    $ ssh -i "~/.ssh/grader_rsa" grader@ec2-18-217-208-41.us-east-2.compute.amazonaws.com -p 2200
+	Then disable the following on /etc/ssh/ssh-config
 
-	   ChallengeResponseAuthentication no
+	PasswordAuthentication no  
+
+	ChallengeResponseAuthentication no
 
     Secure your ssh and authorized_key files with 
 	```
@@ -169,7 +170,7 @@ we need to change the default ssh port and limit the open ports on the machine
 	chmod 644 .ssh/authorized_keys
 	```
 	on the authorized keys file.
-	
+
 
 
 
