@@ -176,6 +176,7 @@ we need to change the default ssh port and limit the open ports on the machine
 ## Install Apache and other software
 
 	- install the fowlling sofrware 
+
 	 ```
 	 sudo timedatectl set-timezone UTC
 	 sudo apt-get install apache2
