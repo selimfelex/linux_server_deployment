@@ -142,7 +142,7 @@ we need to change the default ssh port and limit the open ports on the machine
 	- Then login with the grader user 
     - Create the .ssh foldr in your home directory
     ```
-    	mkdir .ssh
+    mkdir .ssh
 	```
     - Create the authorized_key file inside it
 	```
@@ -153,8 +153,10 @@ we need to change the default ssh port and limit the open ports on the machine
     Generate key pair(public and private using ssh-keygen command )
     Copy the content of your public key to the authorized_key file on the vm
 	Put the private key under your .ssh folder in your windows local machine 
-    Then try to login with 
+    Then try to login with
+	```
     $ ssh -i "~/.ssh/grader_rsa" grader@ec2-18-217-208-41.us-east-2.compute.amazonaws.com -p 2200
+    ```
 	Then disable the following on /etc/ssh/ssh-config
 
 	PasswordAuthentication no  
@@ -171,6 +173,20 @@ we need to change the default ssh port and limit the open ports on the machine
 	```
 	on the authorized keys file.
 
+## Install Apache and other software
 
-
-
+	- install the fowlling sofrware 
+	 ```
+	 sudo timedatectl set-timezone UTC
+	 sudo apt-get install apache2
+	 sudo apt-get install python2.7
+	 sudo apt-get install libapache2-mod-wsgi
+	 sudo apt-get install postgresql
+	 sudo apt-get install git
+	 sudo apt-get install pip
+	 sudo -H pip install SQLAlchemy
+	 sudo -H pip install psycopg2 
+	 sudo -H pip install flask
+	 sudo -H pip install --upgrade google-api-python-client oauth2client
+	 sudo -H pip install requests
+	 ```
