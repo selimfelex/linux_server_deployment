@@ -191,3 +191,60 @@ we need to change the default ssh port and limit the open ports on the machine
 	 sudo -H pip install --upgrade google-api-python-client oauth2client
 	 sudo -H pip install requests
 	 ```
+
+- configure Apache and WSGI to host your python web application 
+
+	1. first you need to clone your app using git clone to the directory of /var/www/html
+	```
+	cd /var/www/html
+	git clone https://github.com/selimfelex/FSND-ITEM-CATALOG-APP-PYTHON.git
+	```
+	 To serve the python application, it is important that Apache forward certain types of requests to mod_wsgi. It is also important to create a python file that tells mod_wsgi how to handle these requests.
+	 You can do this by creating a website for WSGI that will tell Apache the location of python file and setup the file accordingly.
+	 You then need to configure Apache to handle requests using the WSGI module. You’ll do this by editing the follwing file.
+	 ```
+	 sudo nano  /etc/apache2/sites-enabled/000-default.conf
+	 ```
+ 	This file tells Apache how to respond to requests, where to find the files for a particular site and much more
+
+	add the following lines inside virtualhost section 
+	```
+	WSGIScriptAlias / /var/www/application.wsgi
+        <Directory /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON>
+        #WSGIProcessGroup OurApp
+        #WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+        </Directory>
+	```
+
+
+	the first line tells apache how to handle requests to the / URL so it should be 
+	forwarded to the application.wsgi that we will configur to point to our python app
+	the second line tells where is the application and files located on the server 
+	2. we need to create the wsgi file (application.wsgi)
+	```
+	touch /var/www/application.wsgi
+	sudo nano /var/www/application.wsgi
+	 ```
+	then add the follwing setting under it 
+	those lines tells the place of the application so that wsgi will import it as an object and handle its output to the appache to serve html requests
+	```
+	#!/usr/bin/python
+	import os
+	import sys
+	import logging
+	#activate_this = '/var/www/html/FSND-ITEM-CATALOG-APP-PYTHON/application.py'
+	#execfile(activate_this, dict(__file__=activate_this))
+	logging.basicConfig(stream=sys.stderr)
+	sys.path.insert(0,"/var/www/html/FSND-ITEM-CATALOG-APP-PYTHON")
+	from application import app as application
+	```
+
+	ps. in the last line (applicatin) word is the name of your main python file
+	as it will import the app section from that file as an instance to run in the WSGI 
+
+	3.  you need to add an empty file inside your app folder called __init__.py
+	```	
+		touch /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON/__init.py
+	```
