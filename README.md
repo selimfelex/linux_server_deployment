@@ -260,25 +260,28 @@ we need to change the default ssh port and limit the open ports on the machine
 	```
 
  2. Set the password for user postgres, then exit psql (Ctrl-D) :
-	```	
-    ALTER USER postgres with encrypted password 'xxxxxxx';
-   ```	
 
-    Close psql. 
-	```	
-    \q
-	```	
+	 ```	
+     ALTER USER postgres with encrypted password 'xxxxxxx';
+	 ```	
+
+   Close psql. 
+	 ```	
+     \q
+	 ```	
 
 3. Edit the pg_hba.conf file :
-	```	
-	sudo nano /etc/postgresql/10/main/pg_hba.conf
-	```	
+
+	 ```	
+	 sudo nano /etc/postgresql/10/main/pg_hba.conf
+	 ```	
 And change "peer" to "md5" on the line concerning postgres :
-	```	
-	local      all     postgres     peer md5
-	# IPv4 local connections:
-	host     all             catalog        127.0.0.1/32            md5
-	```
+
+	 ```	
+	 local      all     postgres     peer md5
+	 # IPv4 local connections:
+	 host     all             catalog        127.0.0.1/32            md5
+	 ```
 the last line will allow conection form local host only for a user catalog that we will ceate later to use it in our DB connection string 
 
 4. open file named postgresql.conf
@@ -316,4 +319,3 @@ cd /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON/
 by browsing the fowlling URI
 	http://18.217.208.41.xip.io
 	http://ec2-18-217-208-41.us-east-2.compute.amazonaws.com
-	
