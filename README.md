@@ -214,12 +214,12 @@ we need to change the default ssh port and limit the open ports on the machine
 	add the following lines inside virtualhost section 
 	```
 	WSGIScriptAlias / /var/www/application.wsgi
-        <Directory /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON>
-        #WSGIProcessGroup OurApp
-        #WSGIApplicationGroup %{GLOBAL}
-        Order deny,allow
-        Allow from all
-        </Directory>
+    <Directory /var/www/html/FSND-ITEM-CATALOG-APP-PYTHON>
+    #WSGIProcessGroup OurApp
+    #WSGIApplicationGroup %{GLOBAL}
+    Order deny,allow
+    Allow from all
+    </Directory>
 	```
 
 
