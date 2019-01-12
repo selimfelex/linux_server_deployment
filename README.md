@@ -36,60 +36,58 @@ oauth2client
 - then click next with the default values untill you see your instance created in your EC2 Dashboard
 - you should be able to download the Private key pair while you create the machine (very important)
 -  after you download the private key put it in the .ssh folder and change its permission to 400
-'''
+```
 sudo chmod 400 AWSPrivateKeyPair.pem
--you should be able  to connect to the instance using ssh and the downloaded private key of the instance 
-'''
+```
+* you should be able  to connect to the instance using ssh and the downloaded private key of the instance 
+```
 ssh -i "AWSPrivateKeyPair.pem" ubuntu@ec2-18-217-208-41.us-east-2.compute.amazonaws.com
+```
 
-- after you login to the machine make sure to update it to the latest version 
-'''
+* after you login to the machine make sure to update it to the latest version 
+```
 sudo apt-get update
-'''
 sudo apt-get upgrade
-
+```
 ### Securing access to your instance
 we need to change the default ssh port and limit the open ports on the machine 
 - Change the SSH port from 22 to 2200. Make sure to configure the Lightsail firewall to allow it
-	To change the default port the SSHD daemon is listening on. We can edit the configuration file using a nano editor:
-	1. '''
+	* To change the default port the SSHD daemon is listening on. We can edit the configuration file using a nano editor:
+	```
 	$ sudo nano /etc/ssh/sshd_config
-	Then look for the line below:
-	2. '''
-	# Port 22
-	First comment the line by removing the pound sign before the line. Then, enter your preferred port on the right side.
-	3. '''
+	```
+	* Then look for the line below:
+	```
+	#Port 22
+	```
+	* First comment the line by removing the pound sign before the line. Then, enter your preferred port on the right side.
+	```
 	Port 2200
-	To avoid completely locking yourself from your system, you should whitelist the port that you have specified above on your firewall, and in your Amazon console instance configuration  
-	go to your console and from networking and security select the security group
+	```
+	* To avoid completely locking yourself from your system, you should whitelist the port that you have specified above on your firewall, and in your Amazon console instance configuration  
+	* go to your console and from networking and security select the security group
 	from the action menu select Edit inbound rule , 
 	make sure to add required ports 2200 tcp ,80 tcp, 123udp  and save the changes 
 
-	
-	4. '''
+	* Once you make a change to the SSHD daemon configuration file, you should restart the services to reload the new changes.
+	```
 	$ sudo service sshd restart
-	Once you make a change to the SSHD daemon configuration file, you should restart the services to reload the new changes.
-	try to connect with the new ssh port 
-	'''
+	```
+	* try to connect with the new ssh port 
+	```
 	ssh -i "AWSPrivateKeyPair.pem" ubuntu@ec2-18-217-208-41.us-east-2.compute.amazonaws.com -p 2200
-
-	5. configure Uncomplicated firewall UFW to allow ports like
-	'''
+	```
+	* configure Uncomplicated firewall UFW to allow ports like
+	```
 	sudo ufw allow 2200/tcp
-	''' 
 	sudo ufw allow 80/tcp 
-	'''
 	sudo ufw allow 123/udp 
-	'''
 	sudo ufw default allow outgoing
-	'''
 	sudo ufw default deny incoming
-	'''
 	sudo ufw enable 
-	'''
 	sudo service ssh restart
-
+	```
 - try to connect with the new ssh port 
-	'''
+	```
 	ssh -i "AWSPrivateKeyPair.pem" ubuntu@ec2-18-217-208-41.us-east-2.compute.amazonaws.com -p 2200
-
+	```
