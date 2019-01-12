@@ -91,3 +91,85 @@ we need to change the default ssh port and limit the open ports on the machine
 	```
 	ssh -i "AWSPrivateKeyPair.pem" ubuntu@ec2-18-217-208-41.us-east-2.compute.amazonaws.com -p 2200
 	```
+
+## Add a new user named grader and secure login with keypairs
+- you can add user with the follwing command 
+	```
+	sudo adduser grader
+	```
+- giving sudo access 
+	as users that has sudo access is included in the file insid folder called /etc.suders.d
+	you can creat a new file or edit the already file created wit the instance name 
+	you can find the file name with this command
+	```
+	sudo ls /etc/sudoers.d
+	```
+	you will see some file called 90-cloud-init-users
+	hens you can edit this file and add entry for the new user grader to give him sudo access
+	```
+	sudo nano /etc/sudoers.d/90-cloud-init-users
+	```
+
+	as the file should look like this 
+	```
+	# Created by cloud-init v. 18.3-9-g2e62cb8a-0ubuntu1~18.04.2 on Mon, 07 Jan 2019 18:25:22 +0000
+	# User rules for ubuntu
+	ubuntu ALL=(ALL) NOPASSWD:ALL
+	grader ALL=(ALL) NOPASSWD:ALL
+	```
+	save and exit the file 
+
+- generating a new key pairs for the new user grader to allow login without password
+  and then prohipt login with password to secure your server
+  first Edit /etc/ssh/sshd-config  
+	```
+	sudo nano  etc/ssh/sshd-config
+	```
+
+	Make sure that you allow password access first to allow the grader user to login and create
+	 .ssh folder and authorized_keys file to add the generated public key 
+	 so the file should have these settings
+	```	 
+	PubkeyAuthentication yes
+	RSAAuthentication yes
+	PasswordAuthentication yes   #( this should be no after you finish)
+	ChallengeResponseAuthentication yes  #( this should be no after you finish)
+	```
+	Then restart the ssh service with command
+	```
+	 sudo service ssh restart
+	 ```
+	- Then login with the grader user 
+    - Create the .ssh foldr in your home directory
+    ```
+    	mkdir .ssh
+	```
+    - Create the authorized_key file inside it
+	```
+    Touch .ssh/authorized_keys
+	```
+       Open your local terminal 
+       Generate key pair(public and private using ssh-keygen command )
+       Copy the content of your public key to the authorized_key file on the vm
+	   Put the private key under your .ssh folder in your windows local machine 
+       Then try to login with 
+       $ ssh -i "~/.ssh/grader_rsa" grader@ec2-18-217-208-41.us-east-2.compute.amazonaws.com -p 2200
+	   Then disable the following on /etc/ssh/ssh-config
+
+	   PasswordAuthentication no  
+
+	   ChallengeResponseAuthentication no
+
+    Secure your ssh and authorized_key files with 
+	```
+ 	chmod 700 .ssh
+ 	```
+ 	on our SSH directory, and
+ 	```
+	chmod 644 .ssh/authorized_keys
+	```
+	on the authorized keys file.
+	
+
+
+
