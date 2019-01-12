@@ -1,5 +1,5 @@
 # Linux Server Deployment
-how to deploy you python web application and configure  Linux server on the cloud serving python ,flask, WSGI, Apache, PostgerSQL
+how to deploy your python web application and configure  Linux server on the cloud serving python ,flask, WSGI, Apache, PostgerSQL
 
 ## Project Description
  this project will describe how to deploy Linux web server on Amazon web services AWS utilizing the technologies of Python SQLAlchemy, Flask Framework, OAuth 2.0 Protocol, APIs, Apache, WSGI and  PostgreSQL to run Python web-application  called (Item Catalog)
@@ -178,7 +178,6 @@ we need to change the default ssh port and limit the open ports on the machine
 - install the fowlling sofrware
 
 	 ```
-	 sudo timedatectl set-timezone UTC
 	 sudo apt-get install apache2
 	 sudo apt-get install python2.7
 	 sudo apt-get install libapache2-mod-wsgi
@@ -190,8 +189,13 @@ we need to change the default ssh port and limit the open ports on the machine
 	 sudo -H pip install flask
 	 sudo -H pip install --upgrade google-api-python-client oauth2client
 	 sudo -H pip install requests
+	 sudo timedatectl set-timezone UTC
 	 ```
 
+- set the time to UTC wth this command
+ 	 ```
+	 sudo timedatectl set-timezone UTC
+	 ```
 - configure Apache and WSGI to host your python web application 
 
 	1. first you need to clone your app using git clone to the directory of /var/www/html
