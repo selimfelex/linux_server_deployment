@@ -323,4 +323,46 @@ make sure you run the fowlling files for the DB tables creation and  seed fron t
 by browsing the fowlling URI
 	http://18.217.208.41.xip.io
 	http://ec2-18-217-208-41.us-east-2.compute.amazonaws.com
+	server ip address : 18.217.208.41
 
+## summary of configurations made
+1. create a VM maching on Amazon lightsail
+2. secure server with UFW to allow required ports
+3. added user login and secure it with keypair
+4. install required software
+5. configure Apache server and WSGI to host your app
+6. configure PostgreSQL , create login , create DB 
+6. git clone your app and create WSGI file to run on server 
+
+## summary of software installed
+	 apache2
+	 python2.7
+	 libapache2-mod-wsgi
+	 postgresql
+	 git
+	 pip
+	 SQLAlchemy
+	 psycopg2 
+	 flask
+	 google-api-python-client oauth2client
+	 requests
+
+## summary of configurations made
+1. 	• How to connect to your Linux instance
+	https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html?icmpid=docs_ec2_console
+	• Learn about AWS Free Usage Tier
+	https://aws.amazon.com/free/
+	• Amazon EC2: User Guide
+	https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html?icmpid=docs_ec2_console
+2. 	• configuring UFW
+	https://stackoverflow.com/questions/47342988/aws-ssh-port-timeout-after-changing-port-number
+3.	The Complete Guide to “useradd” Command in Linux
+	https://www.tecmint.com/add-users-in-linux/
+4.	Ubuntu Manpage Repository
+	http://manpages.ubuntu.com/
+5.	Deploying Flask Application Using mod_wsgi
+	http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/#configuring-apache
+	https://blog.ekbana.com/deploying-flask-application-using-mod-wsgi-bdf59174a389	
+6.	how to configure PostgreSQL
+	https://www.ntchosting.com/encyclopedia/databases/postgresql/create-user/
+	
