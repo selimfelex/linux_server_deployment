@@ -1,11 +1,11 @@
-# Linux Server Deployment
+# Linux web Server Deployment on AWS
 how to deploy your python web application and configure  Linux server on the cloud serving python ,flask, WSGI, Apache, PostgerSQL
 
 ## Project Description
  this project will describe how to deploy Linux web server on Amazon web services AWS utilizing the technologies of Python SQLAlchemy, Flask Framework, OAuth 2.0 Protocol, APIs, Apache, WSGI and  PostgreSQL to run Python web-application  called (Item Catalog)
 
 ## Project Specification
-the main page of the application can be accessed by opening the URI http://18.217.208.41.xip.io 
+the main page of the application can be accessed by opening the URI http://ec2-18-188-74-86.us-east-2.compute.amazonaws.com/ 
 the main page will contain two lists to  show all categories with recently added items  (main page)
 - Clickable categories are listed in the navigation bar,
 whenever a category is clicked showCategoryItems  function will be executed to view all items in that category
